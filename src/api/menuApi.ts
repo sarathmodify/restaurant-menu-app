@@ -43,18 +43,29 @@ export const menuApi = {
     },
 
     // GET menu items with filters
+    // Note: JSON Server v1.0 doesn't support full-text search with 'q'
+    // We need to do client-side filtering for search
     filterMenuItems: async (filters: { category?: string; search?: string }): Promise<MenuItem[]> => {
         const params: Record<string, string> = {};
 
-        if (filters.category) {
-            params.category = filters.category;
+        // Only add category param if it has a non-empty value
+        if (filters.category && filters.category.trim() !== '') {
+            params.category = filters.category.trim();
         }
 
-        if (filters.search) {
-            params.q = filters.search; // JSON Server uses 'q' for full-text search
-        }
-
+        // Fetch all items (or filtered by category)
         const { data } = await axiosInstance.get('/menu', { params });
+
+        // If there's a search query, filter client-side
+        if (filters.search && filters.search.trim() !== '') {
+            const searchLower = filters.search.trim().toLowerCase();
+            return data.filter((item: MenuItem) =>
+                item.name.toLowerCase().includes(searchLower) ||
+                item.description.toLowerCase().includes(searchLower) ||
+                item.category.toLowerCase().includes(searchLower)
+            );
+        }
+
         return data;
     },
 };

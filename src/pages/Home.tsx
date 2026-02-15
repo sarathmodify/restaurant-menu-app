@@ -62,7 +62,7 @@ const Home: React.FC = () => {
     const isSubmitting = addMutation.isPending || updateMutation.isPending;
 
     return (
-        <div className="container" style={{ paddingBottom: '4rem' }}>
+        <div className="container fade-in" style={{ paddingBottom: '4rem' }}>
             {/* Header */}
             <header style={{
                 display: 'flex',

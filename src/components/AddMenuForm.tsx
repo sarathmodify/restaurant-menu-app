@@ -63,7 +63,7 @@ const AddMenuForm = ({ onSubmit, initialData, onCancel, isSubmitting }: AddMenuF
             zIndex: 1000,
             backdropFilter: 'blur(4px)'
         }}>
-            <div className="card" style={{
+            <div className="card scale-in" style={{
                 width: '100%',
                 maxWidth: '500px',
                 maxHeight: '90vh',

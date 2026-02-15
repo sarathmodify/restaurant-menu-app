@@ -8,11 +8,14 @@ interface MenuItemProps {
 }
 
 const MenuItem: React.FC<MenuItemProps> = ({ item, onEdit, onDelete }) => {
+    // Local SVG placeholder - works offline and never fails
+    const placeholderImage = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='300'%3E%3Crect fill='%23f3f4f6' width='400' height='300'/%3E%3Ctext fill='%239ca3af' font-family='Arial, sans-serif' font-size='18' text-anchor='middle' x='200' y='140'%3ENo Image%3C/text%3E%3Ctext fill='%23d1d5db' font-family='Arial, sans-serif' font-size='48' text-anchor='middle' x='200' y='180'%3E%F0%9F%8D%97%3C/text%3E%3C/svg%3E";
+
     return (
         <div className="card menu-item">
             <div className="menu-item-image-container" style={{ position: 'relative', height: '200px', overflow: 'hidden' }}>
                 <img
-                    src={item.image || 'https://via.placeholder.com/400x300?text=No+Image'}
+                    src={item.image || placeholderImage}
                     alt={item.name}
                     style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                 />

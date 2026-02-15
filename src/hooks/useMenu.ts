@@ -14,7 +14,13 @@ export const useMenu = (filters?: UseMenuFilters) => {
     return useQuery({
         queryKey: ['menu', filters],
         queryFn: () => {
-            if (filters && (filters.category || filters.search)) {
+            // Check if we have any non-empty filter values
+            const hasFilters = filters && (
+                (filters.category && filters.category.trim() !== '') ||
+                (filters.search && filters.search.trim() !== '')
+            );
+
+            if (hasFilters) {
                 return menuApi.filterMenuItems(filters);
             }
             return menuApi.fetchMenuItems();
