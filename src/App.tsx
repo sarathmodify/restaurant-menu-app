@@ -1,11 +1,9 @@
-
+import Home from './pages/Home'
 
 function App() {
-
-
   return (
-    <div>
-      <h1>Restaurant Menu</h1>
+    <div className="app">
+      <Home />
     </div>
   )
 }
